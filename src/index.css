@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
