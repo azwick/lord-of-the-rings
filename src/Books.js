@@ -1,3 +1,4 @@
+import { Card, CardHeader } from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 
 const fetchBooks = async () => {
@@ -14,7 +15,7 @@ const List = () => {
     }, []);
 
     return (
-        <section className="books">
+        <section>
             {books.map(book => {
                 return (
                     <Item key={book._id} book={book}/>
@@ -26,10 +27,12 @@ const List = () => {
 
 const Item = ({book}) => {
     return (
-        <div>
-            <h3>{book.name}</h3>
-            {console.log(book._id)}
-        </div>
+      <Card>
+        <CardHeader
+          title={book.name}
+          subheader={book._id}
+        />
+      </Card>
     );
 }
 
