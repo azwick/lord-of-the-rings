@@ -14,7 +14,9 @@ Access token: 9_HW2X8YspdsGcABsncg (Include this in your API calls!)
 
 ### Material UI
 [Material UI Components](https://material.io/components?platform=web ) <br/>
-[Material UI Components API](https://material-ui.com/getting-started/installation/)
+[Material UI Components API](https://material-ui.com/getting-started/installation/) <br/>
+[Material UI Icons](https://material-ui.com/components/material-icons/) <br/>
+[About the lab](https://material-ui.com/de/components/about-the-lab/)
 <br/><br/>
 
 ### Run project
@@ -30,6 +32,16 @@ cd lord-of-the-rings
 npm install axios
 
 npm add @material-ui/core
+npm add @material-ui/icons 
+npm add @material-ui/lab
 
 npm add react-router-dom
 ```
+
+### To Do
+- [] Hook for fetching
+- [] Loading state
+- [] Filter characters
+- [] Detail page for movies and/or books
+- [] Pagination?
+- [] Sorting?
