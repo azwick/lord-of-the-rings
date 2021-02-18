@@ -1,4 +1,4 @@
-import { Card, CardHeader } from "@material-ui/core";
+import { Button, Card, CardActions, CardHeader, Grid } from "@material-ui/core";
 import React, {useEffect, useState} from 'react';
 
 const fetchBooks = async () => {
@@ -15,32 +15,37 @@ const List = () => {
     }, []);
 
     return (
-        <section>
+        <Grid container direction="row" spacing={3}>
             {books.map(book => {
                 return (
                     <Item key={book._id} book={book}/>
                 )
             })}
-        </section>
+        </Grid>
     );
 }
 
 const Item = ({book}) => {
     return (
-      <Card>
-        <CardHeader
-          title={book.name}
-          subheader={book._id}
-        />
-      </Card>
+      <Grid item xs={12} md={6}>
+        <Card>
+            <CardHeader
+                title={book.name}
+                subheader='Written by J. R. R. Tolkien'
+            />
+            <CardActions>
+              <Button size="small" color="primary">
+                Learn More
+              </Button>
+            </CardActions>
+        </Card>
+      </Grid>
     );
 }
 
 const Books = () => {
     return (
-        <div className="books">
-            <List/>
-        </div>
+        <List/>
     );
 }
 
