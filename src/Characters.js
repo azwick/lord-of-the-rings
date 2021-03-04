@@ -1,21 +1,10 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Chip, Container, Grid } from "@material-ui/core";
-import React, {useEffect, useState} from 'react';
 
 import DoneIcon from '@material-ui/icons/Done';
 import LaunchIcon from '@material-ui/icons/Launch';
 import Pagination from '@material-ui/lab/Pagination';
-import axios from 'axios';
-
-const token = '9_HW2X8YspdsGcABsncg';
-
-const fetchMovies = async () => {
-    const response = await axios.get('https://the-one-api.dev/v2/character', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-    return response;
-};
+import Spinner from './components/Spinner';
+import useFetch from './hooks/useFetch';
 
 const FilterList = () => {
     // https://lotr.fandom.com/wiki/Category:Characters_by_race
@@ -47,15 +36,11 @@ const PaginationBar = () => {
 }
 
 const List = () => {
-    const [characters, setCharacters] = useState([]);
-
-    useEffect(() => {
-        fetchMovies().then(resp => setCharacters(resp.data.docs));
-        fetchMovies().catch((error) => {console.error(error)});
-    }, []);
+    const { data: characters, isPending, error } = useFetch('https://the-one-api.dev/v2/character');
 
     return (
         <Grid container direction="row" spacing={3}>
+            {error && <div>{error}</div>}
             {characters.slice(10, 20).map(character => {
                 return (
                     <Grid item key={character._id} xs={12} sm={6} md={4}>
@@ -74,10 +59,10 @@ const List = () => {
                               </Button>
                             </CardActions>
                         </Card>
-                        {/* {console.log(character)} */}
                     </Grid>
                 )
             })}
+            {isPending && <Spinner />}
         </Grid>
     );
 }

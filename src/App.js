@@ -27,13 +27,6 @@ function App() {
           <Route exact path="/" component={Books} />
         </Switch>
 
-        {/* <p>Playing with the lord of the rings API</p>
-        <p>Books, Movies, Character</p>
-        <h2>All Books</h2>
-        <Books/>
-        <br/><br/>
-        <h2>All Movies</h2>
-        <Movies/> */}
       </Container>
     </div>
   );

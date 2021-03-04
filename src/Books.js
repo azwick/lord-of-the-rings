@@ -1,26 +1,20 @@
 import { Button, Card, CardActions, CardHeader, Grid } from "@material-ui/core";
-import React, {useEffect, useState} from 'react';
 
-const fetchBooks = async () => {
-    const response = await fetch(`https://the-one-api.dev/v2/book`);
-    const result = await response.json();
-    return result;
-};
+import Spinner from './components/Spinner';
+import useFetch from './hooks/useFetch';
 
 const List = () => {
-    const [books, setBooks] = useState([]);
-    
-    useEffect(() => {
-        fetchBooks().then(data => setBooks(data.docs));
-    }, []);
+    const { data: books, isPending, error } = useFetch('https://the-one-api.dev/v2/movie');
 
     return (
         <Grid container direction="row" spacing={3}>
+            {error && <div>{error}</div>}
             {books.map(book => {
                 return (
                     <Item key={book._id} book={book}/>
                 )
             })}
+            {isPending && <Spinner />}
         </Grid>
     );
 }

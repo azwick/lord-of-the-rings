@@ -1,29 +1,14 @@
 import { Button, Card, CardActions, CardHeader, Grid } from "@material-ui/core";
-import React, {useEffect, useState} from 'react';
 
-import axios from 'axios';
-
-const token = '9_HW2X8YspdsGcABsncg';
-
-const fetchMovies = async () => {
-    const response = await axios.get('https://the-one-api.dev/v2/movie', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-    return response;
-};
+import Spinner from './components/Spinner';
+import useFetch from './hooks/useFetch';
 
 const List = () => {
-    const [movies, setMovies] = useState([]);
-
-    useEffect(() => {
-        fetchMovies().then(resp => setMovies(resp.data.docs));
-        fetchMovies().catch((error) => {console.error(error)});
-    }, []);
+    const { data: movies, isPending, error } = useFetch('https://the-one-api.dev/v2/movie');
 
     return (
         <Grid container direction="row" spacing={3}>
+            {error && <div>{error}</div>}
             {movies.map(movie => {
                 return (
                     <Grid item key={movie._id} xs={12} md={4}>
@@ -37,10 +22,10 @@ const List = () => {
                               </Button>
                             </CardActions>
                         </Card>
-                        {console.log(movie)}
                     </Grid>
                 )
             })}
+            {isPending && <Spinner />}
         </Grid>
     );
 }
